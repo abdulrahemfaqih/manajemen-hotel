@@ -1,17 +1,27 @@
 <div>
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Dashboard</h1>
-            @include('partials.breadcumbs')
+            <h1>Hotel</h1>
+            @include('partials.breadcrumbs')
         </div>
         <!-- End Page Title -->
 
         <section class="section">
             <div class="row">
                 <div class="col">
+                    @if (session()->has('success'))
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Hotel List</h5>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Hotel List</h5>
+                                <a wire:navigate href="{{ route('hotel.create') }}"
+                                    class="btn btn-primary btn-sm">Create Hotel</a>
+                            </div>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -26,16 +36,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Hotel Purabaya</td>
-                                        <td>Surabaya, jl singaraja no 45</td>
-                                        <td>72457237</td>
-                                        <td>purabaya-hotel@gmail.com</td>
-                                        <td>4.5/5</td>
-                                        <td>jam 8</td>
-                                        <td>jam 12</td>
-                                    </tr>
+                                    @if (count($hotels) == 0)
+                                        <tr>
+                                            <th class="text-center" colspan="8">tidak ada data hotel</th>
+                                        </tr>
+                                    @endif
+                                    @foreach ($hotels as $hotel)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $hotel->name }}</td>
+                                            <td>{{ $hotel->address }}</td>
+                                            <td>{{ $hotel->phone }}</td>
+                                            <td>{{ $hotel->email }}</td>
+                                            <td>{{ $hotel->stars }}</td>
+                                            <td>{{ $hotel->check_in_time }}</td>
+                                            <td>{{ $hotel->check_out_time }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

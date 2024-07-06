@@ -79,8 +79,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a wire:navigate class="nav-link {{ request()->routeIs('hotels') ? '' : 'collapsed' }}"
-                    href="{{ route('hotels') }}">
+                <a wire:navigate class="nav-link {{ request()->routeIs('hotel.*') ? '' : 'collapsed' }}"
+                    href="{{ route('hotel.index') }}">
                     <i class="bi bi-grid"></i>
                     <span>Hotels</span>
                 </a>

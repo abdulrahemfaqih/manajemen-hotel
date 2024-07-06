@@ -2,7 +2,7 @@
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Dashboard</h1>
-            @include('partials.breadcumbs')
+            @include('partials.breadcrumbs')
         </div>
         <!-- End Page Title -->
 
