@@ -11,8 +11,8 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Create Hotel</h5>
-                            <form wire:submit.prevent="create">
+                            <h5 class="card-title">Edit Hotel</h5>
+                            <form wire:submit.prevent="update">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="row mb-3">
@@ -91,10 +91,7 @@
                                         @enderror
                                     </div>
                                 </div>
-
-
                                 <button type="submit" class="btn btn-sm btn-primary my-2 float-end">Submit</button>
-
                             </form>
                         </div>
                     </div>

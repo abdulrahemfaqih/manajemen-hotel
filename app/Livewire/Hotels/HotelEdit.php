@@ -7,9 +7,9 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 
-class HotelCreate extends Component
+class HotelEdit extends Component
 {
-    #[Title('Create hotel')]
+    #[Title('Hotel Edit')]
 
     #[Validate('required|min:3')]
     public $name;
@@ -26,16 +26,30 @@ class HotelCreate extends Component
     #[Validate('required')]
     public $check_out_time;
 
-    public function render()
+    public $hotel;
+
+    public function mount(string $id)
     {
-        return view('livewire.hotels.hotel-create');
+        $this->hotel = Hotel::find($id);
+        $this->name = $this->hotel->name;
+        $this->phone = $this->hotel->phone;
+        $this->address = $this->hotel->address;
+        $this->email = $this->hotel->email;
+        $this->stars = $this->hotel->stars;
+        $this->check_in_time = $this->hotel->check_in_time;
+        $this->check_out_time = $this->hotel->check_out_time;
     }
 
-    public function create()
+    public function render()
+    {
+        return view('livewire.hotels.hotel-edit');
+    }
+
+    public function update()
     {
         $validated = $this->validate();
-        Hotel::create($validated);
-        session()->flash('success', 'Hotel berhasil ditambahkan');
+        $this->hotel->update($validated);
+        session()->flash('success', 'Hotel berhasil diupdate');
         return $this->redirect(route('hotel.index'), navigate: true);
     }
 }
